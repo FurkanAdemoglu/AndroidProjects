@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         //Dispatcher.IO => Data operasyonlarında kullanılır(Ör: API den veri çekme database e veri yazma )
         //Dispatcher.Default=> Uzun hesaplama sıralama işlemlerinde kullanılır
         //Dispatcher.Unconfined
-        GlobalScope.launch(Dispatchers.IO) {
+       /* GlobalScope.launch(Dispatchers.IO) {
 
             //Network den istek alığımız gibi düşündüğümüz için bu dispatcher ı kullandık
         Log.d(TAG,"Starting coroutine in the thread ${Thread.currentThread().name}")
@@ -52,7 +52,29 @@ class MainActivity : AppCompatActivity() {
                 Log.d(TAG,"Setting text in thread ${Thread.currentThread().name}")
                 //textDummy.text=answer
             }
+        }*/
+//4. ders kodları
+        Log.d(TAG,"Before runBlocking")
+        //run Blocking yeni bir coroutine başlatır ve o coroutine işlemi
+        //tamamlanana kadar main thread i bloklar.Test hazırlarken veya kod içerisinde
+        //suspend fonksiyon kullanacaksak runBlocking kullanabilirz
+
+        runBlocking {
+            launch (Dispatchers.IO){
+                delay(3000L)
+                Log.d(TAG,"Finished IO Coroutine 1")
+
+            }
+            launch(Dispatchers.IO) {
+                delay(3000L)
+                Log.d(TAG,"Finishd IO Corotine 2")
+            }
+
+            Log.d(TAG,"Start of runBlocking")
+            delay(5000L)
+            Log.d(TAG,"End of runBlocking")
         }
+        Log.d(TAG,"After runBlocking")
 
     }
 
