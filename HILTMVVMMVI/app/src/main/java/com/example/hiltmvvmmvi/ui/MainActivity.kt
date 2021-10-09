@@ -1,7 +1,8 @@
-package com.example.hiltmvvmmvi
+package com.example.hiltmvvmmvi.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.hiltmvvmmvi.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
