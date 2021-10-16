@@ -1,11 +1,14 @@
 package com.example.scopefunctions
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
 class MainActivity : AppCompatActivity() {
 
     private var number:Int?=null
+
+    private var i=0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,5 +37,33 @@ class MainActivity : AppCompatActivity() {
             number2
         }?:3
 
+        /**
+         * eğer spesifik bir obje de değişiklikler yapmak istiyorsak apply
+         * ı kullanabilirz
+         *
+         */
+
+        val intent=Intent().apply {
+            /**
+             * Görüldüğü gibi burada this değişkeni var bu aslından intent i
+             * kullandığımızı yani intent e bağlı bütün fonksiyonları çağıra
+             * bileceğimizi gösterir diyelimki bir objenin parametrelerini
+             * değiştirmek istiyoruz ama hepsini değil burada bir çok parametreye
+             * ulaşarak değiştirebiliriz
+             */
+            putExtra("","")
+            putExtra("",0)
+        }
+
+        val intentone=Intent().run {
+            putExtra("","")
+            putExtra("",0)
+            this
+        }
+
+    }
+
+    fun getSquaredI()=(i*i).also {
+        i++
     }
 }
