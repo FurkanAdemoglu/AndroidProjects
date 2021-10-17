@@ -10,6 +10,7 @@ class PreferencesHelper constructor(context: Context) {
     private val KEY_WATER_INTAKE="KEY_WATER_INTAKE"
     private var waterIntakePreferencesListener:WaterintakePreferencesListener?=null
 
+    fun getWaterIntake()=preferences.getInt(KEY_WATER_INTAKE,0)
 
     fun incrementWaterIntake(){
         val waterIntake=preferences.getInt(KEY_WATER_INTAKE,0)
