@@ -6,23 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".WaterTrackerActivity">
 
-    <TextView
-        android:id="@+id/waterCountText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        tools:text="12 cups"
-        />
 
-    <Button
-        android:id="@+id/trackWaterButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="16dp"
-        android:text="Track"
+    <fragment
+        android:id="@+id/fragment"
+        android:name="com.example.learndaggerhilt.WaterTrackerFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         />
 
 </FrameLayout>
