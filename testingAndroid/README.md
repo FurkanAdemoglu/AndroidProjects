@@ -62,3 +62,32 @@ distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
 WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
 License for the specific language governing permissions and limitations under
 the License.
+
+
+Notes Which I taken
+---------------
+
+# Running Test Task
+These folders are known as source sets. Source sets are folders containing source code for your app. The source sets, which are colored green (androidTest and test) contain your tests. When you create a new Android project, you get the following three source sets by default. They are:
+
+main: Contains your app code. This code is shared amongst all different versions of the app you can build (known as build variants)
+androidTest: Contains tests known as instrumented tests.
+test: Contains tests known as local tests.
+The difference between local tests and instrumented tests is in the way they are run.
+
+Local tests (test source set)
+These tests are run locally on your development machine's JVM and do not require an emulator or physical device. Because of this, they run fast, but their fidelity is lower, meaning they act less like they would in the real world.
+
+In Android Studio local tests are represented by a green and red triangle icon.
+
+What makes this an instrumented test?
+
+A test is an instrumented test if it needs or benefits from being run on an emulated or real device. Instrumented tests almost always use the Android OS or Android framework. In this test, you're getting a Context, using InstrumentationRegistry. This allows you to get the package name and do a comparison.
+
+The difference between this test and the last test is that you're using Android Framework code.
+
+Instrumented tests (androidTest source set)
+These tests run on real or emulated Android devices, so they reflect what will happen in the real world, but are also much slower.
+
+In Android Studio instrumented tests are represented by an Android with a green and red triangle icon.
+
