@@ -5,7 +5,11 @@ apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
+    testOptions.unitTests {
+        includeAndroidResources = true
 
+        // ...
+    }
     defaultConfig {
         applicationId "com.example.android.architecture.blueprints.reactive"
         minSdkVersion rootProject.minSdkVersion
@@ -64,4 +68,13 @@ dependencies {
 
     // Other dependencies
     testImplementation "org.hamcrest:hamcrest-all:$hamcrestVersion"
+
+    // AndroidX Test - JVM testing
+    testImplementation "androidx.test.ext:junit-ktx:$androidXTestExtKotlinRunnerVersion"
+
+    testImplementation "androidx.test:core-ktx:$androidXTestCoreVersion"
+
+    testImplementation "org.robolectric:robolectric:$robolectricVersion"
+
+    testImplementation "androidx.arch.core:core-testing:$archTestingVersion"
 }
