@@ -27,10 +27,12 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.example.android.databinding.basicsample.R
 import com.example.android.databinding.basicsample.data.Popularity
 import com.example.android.databinding.basicsample.data.SimpleViewModel
+import com.example.android.databinding.basicsample.databinding.PlainActivityBinding
 
 /**
  * Plain old activity with lots of problems to fix.
@@ -43,11 +45,15 @@ class PlainOldActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.plain_activity)
+        val binding : PlainActivityBinding =
+            DataBindingUtil.setContentView(this, R.layout.plain_activity)
+
+        binding.viewmodel
+        binding.lifecycleOwner = this
 
         // TODO: Explicitly setting initial values is a bad pattern. We'll fix that.
-        updateName()
-        updateLikes()
+        //updateName()
+        //updateLikes()
     }
 
     /**
@@ -56,16 +62,16 @@ class PlainOldActivity : AppCompatActivity() {
      */
     fun onLike(view: View) {
         viewModel.onLike()
-        updateLikes()
+       // updateLikes()
     }
 
     /**
      * So much findViewById! We'll fix that with Data Binding.
      */
-    private fun updateName() {
+    /*private fun updateName() {
         findViewById<TextView>(R.id.plain_name).text = viewModel.name
         findViewById<TextView>(R.id.plain_lastname).text = viewModel.lastName
-    }
+    }*/
 
     /**
      * This method has many problems:
@@ -73,7 +79,7 @@ class PlainOldActivity : AppCompatActivity() {
      * - It has untestable logic
      * - It's updating two views when called even if they're not changing
      */
-    private fun updateLikes() {
+    /*private fun updateLikes() {
         findViewById<TextView>(R.id.likes).text = viewModel.likes.toString()
         findViewById<ProgressBar>(R.id.progressBar).progress =
             (viewModel.likes * 100 / 5).coerceAtMost(100)
@@ -84,7 +90,7 @@ class PlainOldActivity : AppCompatActivity() {
         ImageViewCompat.setImageTintList(image, ColorStateList.valueOf(color))
 
         image.setImageDrawable(getDrawablePopularity(viewModel.popularity, this))
-    }
+    }*/
 
     private fun getAssociatedColor(popularity: Popularity, context: Context): Int {
         return when (popularity) {
