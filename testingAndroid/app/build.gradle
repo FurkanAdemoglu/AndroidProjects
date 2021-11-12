@@ -100,6 +100,16 @@ dependencies {
     debugImplementation "androidx.fragment:fragment-testing:$fragmentVersion"
     implementation "androidx.test:core:$androidXTestCoreVersion"
 
+    // Dependencies for Android instrumented unit tests
+    androidTestImplementation "org.mockito:mockito-core:1.10.19"
+
+    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:$dexMakerVersion"
+
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
+
+
+
+
 
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
 }
