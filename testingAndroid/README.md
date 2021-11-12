@@ -67,7 +67,7 @@ the License.
 Notes Which I taken
 ---------------
 
-# Running Test Task
+## Running Test Task
 These folders are known as source sets. Source sets are folders containing source code for your app. The source sets, which are colored green (androidTest and test) contain your tests. When you create a new Android project, you get the following three source sets by default. They are:
 
 main: Contains your app code. This code is shared amongst all different versions of the app you can build (known as build variants)
@@ -90,4 +90,11 @@ Instrumented tests (androidTest source set)
 These tests run on real or emulated Android devices, so they reflect what will happen in the real world, but are also much slower.
 
 In Android Studio instrumented tests are represented by an Android with a green and red triangle icon.
+
+# Writing your first tests
+Usually, you use implementation when adding a dependency, yet here you're using testImplementation. When you're ready to share your app with the world, it is best not to bloat the size of your APK with any of the test code or dependencies in your app. You can designate whether a library should be included in the main or test code by using gradle configurations. The most common configurations are:
+
+implementation—The dependency is available in all source sets, including the test source sets.
+testImplementation—The dependency is only available in the test source set.
+androidTestImplementation—The dependency is only available in the androidTest source set.
 
