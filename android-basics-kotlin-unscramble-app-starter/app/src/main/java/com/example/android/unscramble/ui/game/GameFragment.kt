@@ -21,6 +21,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.android.unscramble.R
@@ -68,11 +69,13 @@ class GameFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout XML file and return a binding object instance
-        binding = GameFragmentBinding.inflate(inflater, container, false)
-
+        // binding = GameFragmentBinding.inflate(inflater, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.game_fragment, container, false)
         Log.d("GameFragment", "GameFragment created/re-created!")
-        Log.d("GameFragment", "Word: ${viewModel.currentScrambledWord} " +
-                "Score: ${viewModel.score} WordCount: ${viewModel.currentWordCount}")
+        Log.d(
+            "GameFragment", "Word: ${viewModel.currentScrambledWord} " +
+                    "Score: ${viewModel.score} WordCount: ${viewModel.currentWordCount}"
+        )
         return binding.root
     }
 
@@ -87,6 +90,14 @@ class GameFragment : Fragment() {
         // Setup a click listener for the Submit and Skip buttons.
         binding.submit.setOnClickListener { onSubmitWord() }
         binding.skip.setOnClickListener { onSkipWord() }
+        binding.gameViewModel = viewModel
+
+        binding.maxNoOfWords = MAX_NO_OF_WORDS
+
+        // Specify the fragment view as the lifecycle owner of the binding.
+        // This is used so that the binding can observe LiveData updates
+        binding.lifecycleOwner = viewLifecycleOwner
+
         // Update the UI
         //binding.score.text = getString(R.string.score, 0)
         /*binding.wordCount.text = getString(
@@ -99,7 +110,7 @@ class GameFragment : Fragment() {
         Add a lambda as a second parameter with newWord as a function parameter. The newWord will contain the new scrambled word value.
 
          */
-        viewModel.currentScrambledWord.observe(viewLifecycleOwner,
+      /*  viewModel.currentScrambledWord.observe(viewLifecycleOwner,
             { newWord ->
                 binding.textViewUnscrambledWord.text = newWord
             })
@@ -113,7 +124,7 @@ class GameFragment : Fragment() {
             { newWordCount ->
                 binding.wordCount.text =
                     getString(R.string.word_count, newWordCount, MAX_NO_OF_WORDS)
-            })
+            })*/
     }
 
     /*
@@ -189,7 +200,7 @@ class GameFragment : Fragment() {
     /*
      * Displays the next scrambled word on screen.
      */
-   /* private fun updateNextWordOnScreen() {
-        binding.textViewUnscrambledWord.text = viewModel.currentScrambledWord
-    }*/
+    /* private fun updateNextWordOnScreen() {
+         binding.textViewUnscrambledWord.text = viewModel.currentScrambledWord
+     }*/
 }
