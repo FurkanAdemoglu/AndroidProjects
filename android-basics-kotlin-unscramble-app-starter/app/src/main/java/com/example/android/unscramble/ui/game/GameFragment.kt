@@ -25,16 +25,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.android.unscramble.R
 import com.example.android.unscramble.databinding.GameFragmentBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
  * Fragment where the game is played, contains the game logic.
  */
 class GameFragment : Fragment() {
 
-   /* private var score = 0
-    private var currentWordCount = 0
-    private var currentScrambledWord = "test"
-*/
+    /* private var score = 0
+     private var currentWordCount = 0
+     private var currentScrambledWord = "test"
+ */
 
     // Binding object instance with access to the views in the game_fragment.xml layout
     private lateinit var binding: GameFragmentBinding
@@ -44,9 +45,27 @@ class GameFragment : Fragment() {
     // If the fragment is re-created, it receives the same GameViewModel instance created by the
     // first fragment
 
+    private fun showFinalScoreDialog() {
+        MaterialAlertDialogBuilder(requireContext())//=>The requireContext() method returns a non-null Context.
+        /**
+         * As the name suggests, Context refers to the context or the current state of an application, activity, or fragment. It contains the information regarding the activity, fragment or application. Usually it is used to get access to resources, databases, and other system services. In this step, you pass the fragment context to create the alert dialog.
+         */
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(getString(R.string.congratulations))
+            .setMessage(getString(R.string.you_scored, viewModel.score))
+            .setCancelable(false)//=>Make your alert dialog not cancelable when the back key is pressed,
+            .setNegativeButton(getString(R.string.exit)) { _, _ ->
+                exitGame()
+            }
+            .setPositiveButton(getString(R.string.play_again)) { _, _ ->
+                restartGame()
+            }
+            .show()
+    }
+
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         // Inflate the layout XML file and return a binding object instance
         binding = GameFragmentBinding.inflate(inflater, container, false)
@@ -69,7 +88,8 @@ class GameFragment : Fragment() {
         updateNextWordOnScreen()
         binding.score.text = getString(R.string.score, 0)
         binding.wordCount.text = getString(
-                R.string.word_count, 0, MAX_NO_OF_WORDS)
+            R.string.word_count, 0, MAX_NO_OF_WORDS
+        )
     }
 
     /*
