@@ -19,9 +19,18 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+        <variable
+            name="photo"
+            type="com.example.android.marsphotos.network.MarsPhoto" />
+    </data>
+
     <ImageView
         android:id="@+id/mars_image"
         android:layout_width="wrap_content"
+        app:imageUrl="@{photo.img_src}"
         android:layout_height="170dp"
         android:scaleType="fitXY"
         android:adjustViewBounds="true"
