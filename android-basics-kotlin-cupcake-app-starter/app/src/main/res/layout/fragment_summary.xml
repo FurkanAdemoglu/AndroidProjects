@@ -120,6 +120,7 @@
                     style="@style/Widget.Cupcake.TextView.FinalPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@{@string/total_price(viewModel.price)}"
                     android:layout_gravity="end"
                     android:layout_marginTop="@dimen/side_margin"
                     tools:text="Total $5.00" />
