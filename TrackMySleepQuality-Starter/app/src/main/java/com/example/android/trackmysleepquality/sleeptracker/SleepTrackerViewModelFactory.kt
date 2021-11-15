@@ -26,6 +26,15 @@ import com.example.android.trackmysleepquality.database.SleepDatabaseDao
  *
  * Provides the SleepDatabaseDao and context to the ViewModel.
  */
+
+/**
+ * Take note of the following:
+
+The provided SleepTrackerViewModelFactory takes the same argument as the ViewModel and extends ViewModelProvider.Factory.
+Inside the factory, the code overrides create(), which takes any class type as an argument and returns a ViewModel.
+In the body of create(), the code checks that there is a SleepTrackerViewModel class available, and if there is, returns an instance of it. Otherwise, the code throws an exception.
+
+ */
 class SleepTrackerViewModelFactory(
         private val dataSource: SleepDatabaseDao,
         private val application: Application) : ViewModelProvider.Factory {
