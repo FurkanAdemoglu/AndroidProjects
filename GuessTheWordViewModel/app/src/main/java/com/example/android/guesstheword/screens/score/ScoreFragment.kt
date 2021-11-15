@@ -57,10 +57,7 @@ class ScoreFragment : Fragment() {
             ScoreViewModelFactory(ScoreFragmentArgs.fromBundle(requireArguments()).score)
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(ScoreViewModel::class.java)
-// Add observer for score
-        viewModel.score.observe(viewLifecycleOwner, Observer { newScore ->
-            binding.scoreText.text = newScore.toString()
-        })
+
         // binding.scoreText.text = viewModel.score.toString()
 // Navigates back to game when button is pressed
         binding.scoreViewModel = viewModel
@@ -70,6 +67,7 @@ class ScoreFragment : Fragment() {
                 viewModel.onPlayAgainComplete()
             }
         })
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 }
