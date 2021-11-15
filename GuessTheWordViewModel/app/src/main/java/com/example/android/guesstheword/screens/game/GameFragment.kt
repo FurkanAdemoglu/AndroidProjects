@@ -33,30 +33,37 @@ import com.example.android.guesstheword.databinding.GameFragmentBinding
 /**
  * Fragment where the game is played
  */
+
+/**
+ * Listener bindings are binding expressions that run when events such as onClick(), onZoomIn(), or onZoomOut() are triggered. Listener bindings are written as lambda expressions.
+ *
+ */
 class GameFragment : Fragment() {
 
     private lateinit var binding: GameFragmentBinding
 
     private lateinit var viewModel: GameViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         // Inflate view and obtain an instance of the binding class
         binding = DataBindingUtil.inflate(
-                inflater,
-                R.layout.game_fragment,
-                container,
-                false
+            inflater,
+            R.layout.game_fragment,
+            container,
+            false
         )
         Log.i("GameFragment", "Called ViewModelProvider.get")
 
         // Get the viewModel
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
+// Set the viewmodel for databinding - this allows the bound layout access
+// to all the data in the ViewModel
+        binding.gameViewModel = viewModel
 
-        binding.correctButton.setOnClickListener { onCorrect() }
-        binding.skipButton.setOnClickListener { onSkip() }
-        binding.endGameButton.setOnClickListener { onEndGame() }
 
         //=>When the value of score or the word changes, the score or word displayed on the screen now updates automatically.
         viewModel.score.observe(viewLifecycleOwner, Observer { newScore ->
@@ -77,31 +84,17 @@ class GameFragment : Fragment() {
 
     /** Methods for buttons presses **/
 
-    private fun onSkip() {
-        viewModel.onSkip()
-        //updateWordText()
-        //updateScoreText()
-    }
-    private fun onCorrect() {
-        viewModel.onCorrect()
-       // updateScoreText()
-     //   updateWordText()
-    }
-
-    private fun onEndGame() {
-        gameFinished()
-    }
 
     /** Methods for updating the UI **/
 
-   /* private fun updateWordText() {
-        binding.wordText.text = viewModel.word.value
+    /* private fun updateWordText() {
+         binding.wordText.text = viewModel.word.value
 
-    }*/
+     }*/
 
-   /* private fun updateScoreText() {
-        binding.scoreText.text = viewModel.score.value.toString()
-    }*/
+    /* private fun updateScoreText() {
+         binding.scoreText.text = viewModel.score.value.toString()
+     }*/
 
     /**
      * Called when the game is finished
@@ -109,7 +102,7 @@ class GameFragment : Fragment() {
     private fun gameFinished() {
         Toast.makeText(activity, "Game has just finished", Toast.LENGTH_SHORT).show()
         val action = GameFragmentDirections.actionGameToScore()
-        action.score = viewModel.score.value?:0
+        action.score = viewModel.score.value ?: 0
         NavHostFragment.findNavController(this).navigate(action)
         viewModel.onGameFinishComplete()
     }
