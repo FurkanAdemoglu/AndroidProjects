@@ -33,14 +33,20 @@ class RegistrationActivity : AppCompatActivity() {
      * When @Inject is annotated on a class constructor, it's telling Dagger how to provide instances of that class. When it's annotated on a class field, it's telling Dagger that it needs to populate the field with an instance of that type.
      *
      */
-    @Inject
-    lateinit var registrationViewModel: RegistrationViewModel
+    // @Inject annotated fields will be provided by Dagger
+    @Inject lateinit var registrationViewModel: RegistrationViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        // Ask Dagger to inject our dependencies
+        (application as MyApplication).appComponent.inject(this)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
 
-        //registrationViewModel = RegistrationViewModel((application as MyApplication).userManager)
+        // REMOVE THIS LINE
+        registrationViewModel = RegistrationViewModel((application as MyApplication).userManager)
+
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_holder, EnterDetailsFragment())
             .commit()
